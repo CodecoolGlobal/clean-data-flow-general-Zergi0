@@ -1,3 +1,4 @@
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +35,7 @@ public class DataEntryPage {
     @FindBy(id = "inputCity")
     private WebElement city;
 
-    @FindBy(id = "inputCourse")
+    @FindBy(css = "html > body > div:nth-of-type(2) > div:nth-of-type(2) > form > div:nth-of-type(9) > select")
     private Select county;
 
     @FindBy(id = "#inputZip")
@@ -64,13 +65,16 @@ public class DataEntryPage {
     @FindBy(id = "submit-button")
     private WebElement submitButton;
 
+    @FindBy(css = "div[class^='alert']")
+    private WebElement alert;
+
     public DataEntryPage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
         this.wait = wait;
         PageFactory.initElements(driver, this);
     }
 
-    public void addNewEntry(String firstNameStr, String lastNameStr,String idCardNumberStr, String idNumberStr,
+    public boolean addNewEntry(String firstNameStr, String lastNameStr,String idCardNumberStr, String idNumberStr,
     String emailStr, String phoneNumberStr, String addressStr, String cityStr, String countyStr, int zipCode,
                             int formerAverage, int admissionScoreNum, String startDateStr,boolean welcomePackageArrived, int fullstackFrontendOrBackEnd123){
 
@@ -91,7 +95,9 @@ public class DataEntryPage {
         address.sendKeys(addressStr);
         city.clear();
         city.sendKeys(cityStr);
-        county.selectByValue(countyStr);
+
+        county.selectByVisibleText(countyStr);
+
         zip.clear();
         zip.sendKeys(String.valueOf(zipCode));
         average.clear();
@@ -108,6 +114,15 @@ public class DataEntryPage {
             frontendToggle.click();
         } else if (fullstackFrontendOrBackEnd123 == 3) {
             backendToggle.click();
+        }
+
+        submitButton.click();
+
+        try{
+            wait.until(ExpectedConditions.visibilityOf(alert));
+            return true;
+        } catch (Error e){
+            return false;
         }
     }
 

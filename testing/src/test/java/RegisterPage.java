@@ -2,6 +2,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegisterPage {
@@ -27,5 +28,16 @@ public class RegisterPage {
         this.driver = driver;
         this.wait = wait;
         PageFactory.initElements(driver,this);
+    }
+
+    public void register(String username, String password) {
+        wait.until(ExpectedConditions.visibilityOf(registerContainer));
+        this.username.clear();
+        this.username.sendKeys(username);
+        this.password.clear();
+        this.password.sendKeys(password);
+        confirmPassword.clear();
+        confirmPassword.sendKeys(password);
+        this.registerButton.click();
     }
 }
