@@ -1,4 +1,10 @@
 # About The Project
+This is a learning project created under CodeCool for testing the website of Aegir with automated testing. The System Under Testing is included below.
+
+## Built With
+### Java
+### Selenium
+
 
 ## Getting Started
 
