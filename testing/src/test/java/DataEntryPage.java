@@ -1,6 +1,8 @@
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -35,10 +37,10 @@ public class DataEntryPage {
     @FindBy(id = "inputCity")
     private WebElement city;
 
-    @FindBy(css = "html > body > div:nth-of-type(2) > div:nth-of-type(2) > form > div:nth-of-type(9) > select")
-    private Select county;
+    @FindBy(xpath = "/html/body/div[2]/div[2]/form/div[9]/select")
+    private WebElement county;
 
-    @FindBy(id = "#inputZip")
+    @FindBy(id = "inputZip")
     private WebElement zip;
 
     @FindBy(id = "formerAverage")
@@ -77,7 +79,7 @@ public class DataEntryPage {
     public boolean addNewEntry(String firstNameStr, String lastNameStr,String idCardNumberStr, String idNumberStr,
     String emailStr, String phoneNumberStr, String addressStr, String cityStr, String countyStr, int zipCode,
                             int formerAverage, int admissionScoreNum, String startDateStr,boolean welcomePackageArrived, int fullstackFrontendOrBackEnd123){
-
+        Actions actions = new Actions(driver);
         wait.until(ExpectedConditions.visibilityOf(firstName));
         firstName.clear();
         firstName.sendKeys(firstNameStr);
@@ -96,7 +98,8 @@ public class DataEntryPage {
         city.clear();
         city.sendKeys(cityStr);
 
-        county.selectByVisibleText(countyStr);
+        Select countySelect = new Select(county);
+        countySelect.selectByVisibleText(countyStr);
 
         zip.clear();
         zip.sendKeys(String.valueOf(zipCode));
@@ -106,7 +109,7 @@ public class DataEntryPage {
         admissionScore.sendKeys(String.valueOf(admissionScoreNum));
         startDate.sendKeys(startDateStr);
         if(welcomePackageArrived){
-            welcomePackageCheck.click();
+            actions.moveToElement(welcomePackageCheck).click().perform();
         }
         if (fullstackFrontendOrBackEnd123 == 1){
             fullstackToggle.click();
@@ -116,12 +119,12 @@ public class DataEntryPage {
             backendToggle.click();
         }
 
-        submitButton.click();
+        actions.moveToElement(submitButton).click().perform();
 
         try{
             wait.until(ExpectedConditions.visibilityOf(alert));
             return true;
-        } catch (Error e){
+        } catch (TimeoutException e){
             return false;
         }
     }

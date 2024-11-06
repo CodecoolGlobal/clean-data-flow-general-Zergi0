@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,95 +30,96 @@ public class NewDataTests {
 
         wait = new WebDriverWait(driver, Duration.ofMillis(2000));
 
-        loggedOutNavbar = new LoggedOutNavbar(driver,wait);
-        registerPage = new RegisterPage(driver,wait);
-        loginPage = new LoginPage(driver,wait);
-        navbar = new Navbar(driver,wait);
-        dataEntryPage = new DataEntryPage(driver,wait);
+        loggedOutNavbar = new LoggedOutNavbar(driver, wait);
+        registerPage = new RegisterPage(driver, wait);
+        loginPage = new LoginPage(driver, wait);
+        navbar = new Navbar(driver, wait);
+        dataEntryPage = new DataEntryPage(driver, wait);
 
         driver.get("http://localhost:5555/");
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"000001AA","999999AA","123456AA","000000AA","123456XX","123456ZZ"})
+    @ValueSource(strings = {"000001AA", "999999AA", "123456AA", "000000AA", "123456XX", "123456ZZ"})
     public void idCardTestCorrectBoundries(String idCardNumber) {
         loggedOutNavbar.clickNavbarRegister();
-        registerPage.register("testtest","Testtest1");
+        registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
-        loginPage.login("testtest","Testtest1");
+        loginPage.login("testtest", "Testtest1");
         navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test","test",idCardNumber,"2-19870423-0726",
-                "test@test.test","12345678", "test 1","Budapest","Budapest",
-                1234,1, 1, "20240911",true,3);
+        boolean pass = dataEntryPage.addNewEntry("test", "test", idCardNumber, "2-19870423-0726",
+                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
+                1234, 1, 1, "20240911", true, 3);
         Assertions.assertTrue(pass);
     }
+
     @ParameterizedTest
-    @ValueSource(strings = {"123456asd","12345asd","981asdmkd"})
+    @ValueSource(strings = {"123456asd", "12345asd", "981asdmkd"})
     public void idCardTestInCorrectBoundries(String idCardNumber) {
         loggedOutNavbar.clickNavbarRegister();
-        registerPage.register("testtest","Testtest1");
+        registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
-        loginPage.login("testtest","Testtest1");
+        loginPage.login("testtest", "Testtest1");
         navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test","test",idCardNumber,"2-19870423-0726",
-                "test@test.test","12345678", "test 1","Budapest","Budapest",
-                1234,1, 1, "20240911",true,3);
+        boolean pass = dataEntryPage.addNewEntry("test", "test", idCardNumber, "2-19870423-0726",
+                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
+                1234, 1, 1, "20240911", true, 3);
         Assertions.assertFalse(pass);
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1234,9999,1000,1111})
+    @ValueSource(ints = {1234, 9999, 1000, 1111})
     public void ZipCodeCorrectBoundries(int zip) {
         loggedOutNavbar.clickNavbarRegister();
-        registerPage.register("testtest","Testtest1");
+        registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
-        loginPage.login("testtest","Testtest1");
+        loginPage.login("testtest", "Testtest1");
         navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test","test","123456AA","2-19870423-0726",
-                "test@test.test","12345678", "test 1","Budapest","Budapest",
-                zip,1, 1, "20240911",true,3);
+        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
+                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
+                zip, 1, 1, "20240911", true, 3);
         Assertions.assertTrue(pass);
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {19999,12333,9999999,1,22,33})
+    @ValueSource(ints = {19999, 12333, 9999999, 1, 22, 33})
     public void ZipCodeInCorrectBoundries(int zip) {
         loggedOutNavbar.clickNavbarRegister();
-        registerPage.register("testtest","Testtest1");
+        registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
-        loginPage.login("testtest","Testtest1");
+        loginPage.login("testtest", "Testtest1");
         navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test","test","123456AA","2-19870423-0726",
-                "test@test.test","12345678", "test 1","Budapest","Budapest",
-                zip,1, 1, "20240911",true,3);
+        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
+                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
+                zip, 1, 1, "20240911", true, 3);
         Assertions.assertFalse(pass);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"12345678","11111111","11111111111","99999999","99999999999"})
+    @ValueSource(strings = {"12345678", "11111111", "11111111111", "99999999", "99999999999"})
     public void PhoneNumberCorrectBoundries(String phoneNumber) {
         loggedOutNavbar.clickNavbarRegister();
-        registerPage.register("testtest","Testtest1");
+        registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
-        loginPage.login("testtest","Testtest1");
+        loginPage.login("testtest", "Testtest1");
         navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test","test","123456AA","2-19870423-0726",
-                "test@test.test",phoneNumber, "test 1","Budapest","Budapest",
-                1234,1, 1, "20240911",true,3);
+        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
+                "test@test.test", phoneNumber, "test 1", "Budapest", "Budapest",
+                1234, 1, 1, "20240911", true, 3);
         Assertions.assertTrue(pass);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1111111","99999999999999999999"})
+    @ValueSource(strings = {"1111111", "99999999999999999999"})
     public void PhoneNumberInCorrectBoundries(String phoneNumber) {
         loggedOutNavbar.clickNavbarRegister();
-        registerPage.register("testtest","Testtest1");
+        registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
-        loginPage.login("testtest","Testtest1");
+        loginPage.login("testtest", "Testtest1");
         navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test","test","123456AA","2-19870423-0726",
-                "test@test.test",phoneNumber, "test 1","Budapest","Budapest",
-                1234,1, 1, "20240911",true,3);
+        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
+                "test@test.test", phoneNumber, "test 1", "Budapest", "Budapest",
+                1234, 1, 1, "20240911", true, 3);
         Assertions.assertFalse(pass);
     }
 
@@ -125,55 +127,63 @@ public class NewDataTests {
     @ValueSource(strings = {"2-19870423-0726"})
     public void PersonalCorrectBoundries(String idNumber) {
         loggedOutNavbar.clickNavbarRegister();
-        registerPage.register("testtest","Testtest1");
+        registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
-        loginPage.login("testtest","Testtest1");
+        loginPage.login("testtest", "Testtest1");
         navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test","test","123456AA",idNumber,
-                "test@test.test","12345678", "test 1","Budapest","Budapest",
-                1234,1, 1, "20240911",true,3);
+        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", idNumber,
+                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
+                1234, 1, 1, "20240911", true, 3);
         Assertions.assertTrue(pass);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2-19870423-0725","2-19870423-0727"})
-    public void PersonalInCorrectBoundries(String idNumber) {
+    @ValueSource(strings = {"2-19870423-0700", "2-19870423-0700"})
+    public void PersonalIncorrectBoundries(String idNumber) {
         loggedOutNavbar.clickNavbarRegister();
-        registerPage.register("testtest","Testtest1");
+        registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
-        loginPage.login("testtest","Testtest1");
+        loginPage.login("testtest", "Testtest1");
         navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test","test","123456AA",idNumber,
-                "test@test.test","12345678", "test 1","Budapest","Budapest",
-                1234,1, 1, "20240911",true,3);
+        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", idNumber,
+                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
+                1234, 1, 1, "20240911", true, 3);
         Assertions.assertFalse(pass);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"20220101","20281231","20251222"})
+    @ValueSource(strings = {"20220101", "20281231", "20251222"})
     public void DateCorrectBoundries(String date) {
         loggedOutNavbar.clickNavbarRegister();
-        registerPage.register("testtest","Testtest1");
+        registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
-        loginPage.login("testtest","Testtest1");
+        loginPage.login("testtest", "Testtest1");
         navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test","test","123456AA","2-19870423-0726",
-                "test@test.test","12345678", "test 1","Budapest","Budapest",
-                1234,1, 1, date,true,3);
+        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
+                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
+                1234, 1, 1, date, true, 3);
         Assertions.assertTrue(pass);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"20211231","20290101"})
+    @ValueSource(strings = {"20211231", "20290101"})
     public void DateInCorrectBoundries(String date) {
         loggedOutNavbar.clickNavbarRegister();
-        registerPage.register("testtest","Testtest1");
+        registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
-        loginPage.login("testtest","Testtest1");
+        loginPage.login("testtest", "Testtest1");
         navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test","test","123456AA","2-19870423-0726",
-                "test@test.test","12345678", "test 1","Budapest","Budapest",
-                1234,1, 1, date,true,3);
+        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
+                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
+                1234, 1, 1, date, true, 3);
         Assertions.assertTrue(pass);
+    }
+
+
+    @AfterEach
+    public void tearDown() {
+        if (driver != null) {
+                driver.quit();  // This should close the browser
+        }
     }
 }
