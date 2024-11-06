@@ -12,7 +12,7 @@ Since the information required for each test is massive, the project uses Parame
 While a lot of the tests indicate positive results, there are a lot of tests which indicate more than a few systems are broken. \
 Both the register / login system seems deeply flawled. The data check rules seem to not work consistently, which leads to several issues. \
 Overall the system is
-#### NOT READY
+### NOT READY
 
 ## Getting Started
 
