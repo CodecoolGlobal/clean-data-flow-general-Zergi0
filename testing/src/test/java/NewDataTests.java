@@ -189,7 +189,7 @@ public class NewDataTests {
     @AfterEach
     public void tearDown() {
         if (driver != null) {
-                driver.quit();  // This should close the browser
+                driver.quit();
         }
     }
 }
