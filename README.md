@@ -16,8 +16,10 @@ Overall the system is
 
 ## Getting Started
 
-### 1. Set-up SUT with instructions at: https://github.com/CodecoolGlobal/system-under-testing-registration-form-general-Zergi0
+#### 1. Set-up SUT with instructions at: https://github.com/CodecoolGlobal/system-under-testing-registration-form-general-Zergi0
 
-### 2. Install maven packages.
+#### 2. Install maven packages.
 
-### 3. Use IDE to run tests.
+#### 3. Use IDE to run tests.
+
+#### 4. Add enviroment variables: TEST_USER_NAME= "your_user_name";TEST_USER_PASSWORD = "your_password"
