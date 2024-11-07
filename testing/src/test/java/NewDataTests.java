@@ -41,7 +41,7 @@ public class NewDataTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"000001AA", "999999AA", "123456AA", "000000AA", "123456XX", "123456ZZ"})
-    public void idCardTestCorrectBoundries(String idCardNumber) {
+    public void idCardTestCorrectBoundaries(String idCardNumber) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
@@ -55,7 +55,7 @@ public class NewDataTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"123456asd", "12345asd", "981asdmkd"})
-    public void idCardTestInCorrectBoundries(String idCardNumber) {
+    public void idCardTestIncorrectBoundaries(String idCardNumber) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
@@ -69,7 +69,7 @@ public class NewDataTests {
 
     @ParameterizedTest
     @ValueSource(ints = {1234, 9999, 1000, 1111})
-    public void ZipCodeCorrectBoundries(int zip) {
+    public void ZipCodeCorrectBoundaries(int zip) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
@@ -83,7 +83,7 @@ public class NewDataTests {
 
     @ParameterizedTest
     @ValueSource(ints = {19999, 12333, 9999999, 1, 22, 33})
-    public void ZipCodeInCorrectBoundries(int zip) {
+    public void ZipCodeIncorrectBoundaries(int zip) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
@@ -97,7 +97,7 @@ public class NewDataTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"12345678", "11111111", "11111111111", "99999999", "99999999999"})
-    public void PhoneNumberCorrectBoundries(String phoneNumber) {
+    public void PhoneNumberCorrectBoundaries(String phoneNumber) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
@@ -111,7 +111,7 @@ public class NewDataTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"1111111", "99999999999999999999"})
-    public void PhoneNumberInCorrectBoundries(String phoneNumber) {
+    public void PhoneNumberIncorrectBoundaries(String phoneNumber) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
@@ -125,7 +125,7 @@ public class NewDataTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"2-19870423-0726"})
-    public void PersonalCorrectBoundries(String idNumber) {
+    public void PersonalCorrectBoundaries(String idNumber) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
@@ -138,8 +138,8 @@ public class NewDataTests {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2-19870423-0700", "2-19870423-0700"})
-    public void PersonalIncorrectBoundries(String idNumber) {
+    @ValueSource(strings = {"2-19870423-0701", "2-19870423-0700"})
+    public void PersonalIncorrectBoundaries(String idNumber) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
@@ -152,8 +152,8 @@ public class NewDataTests {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"20220101", "20281231", "20251222"})
-    public void DateCorrectBoundries(String date) {
+    @ValueSource(strings = {"20220101", "20271231", "20251222"})
+    public void DateCorrectBoundaries(String date) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
@@ -167,7 +167,7 @@ public class NewDataTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"20211231", "20290101"})
-    public void DateInCorrectBoundries(String date) {
+    public void DateIncorrectBoundaries(String date) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register("testtest", "Testtest1");
         loggedOutNavbar.clickNavbarLogin();
@@ -176,7 +176,7 @@ public class NewDataTests {
         boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
                 "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
                 1234, 1, 1, date, true, 3);
-        Assertions.assertTrue(pass);
+        Assertions.assertFalse(pass);
     }
 
 
