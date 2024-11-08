@@ -8,18 +8,71 @@ Since the information required for each test is massive, the project uses Parame
 ### Java
 ### Selenium
 
-## SUT Readiness
-While a lot of the tests indicate positive results, there are a lot of tests which indicate more than a few systems are broken. \
-Both the register / login system seems deeply flawled. The data check rules seem to not work consistently, which leads to several issues. \
-Overall the system is
-### NOT READY
 
-## Getting Started
 
-#### 1. Set-up SUT with instructions at: https://github.com/CodecoolGlobal/system-under-testing-registration-form-general-Zergi0
+# Getting Started
 
-#### 2. Install maven packages.
+## Instructions to run SUT
 
-#### 3. Use IDE to run tests.
+### Prerequisites
 
-#### 4. Add enviroment variables: TEST_USER_NAME= "your_user_name";TEST_USER_PASSWORD = "your_password"
+Ensure you have the following installed:
+
+- Python 3.6 or later
+- pip (Python package installer)
+
+### Installation
+-Install and run SUT:
+
+1. **Clone the SUT repository: **
+   ```bash
+   git clone https://github.com/CodecoolGlobal/system-under-testing-registration-form-general-Zergi0.git
+   ```
+
+2. **Create a virtual environment (optional but recommended):**
+    ```bash
+    python -m venv venv
+    ```
+
+3. **Activate the virtual environment:**
+  - On Windows:
+    ```bash
+    .\venv\Scripts\activate
+    ```
+  - On Unix systems (macOS and Linux distros):
+    ```bash
+    source venv/bin/activate`
+    ```
+
+4. **Install the dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+5. **Run the application:**
+    ```bash
+    python app.py
+    ```
+
+-Install and run tests:
+1. ** Clone this repository: **
+```bash
+git clone https://github.com/CodecoolGlobal/clean-data-flow-general-Zergi0.git
+```
+
+2. **Navigate to the folder and install dependencies and enviroment variables: **
+(linux/mac)
+```bash
+TEST_USER_NAME="yourUsername" TEST_USER_PASSWORD="yourPassword" mvn clean install
+```
+(cmd)
+```bash
+set TEST_USER_NAME=yourUsername
+set TEST_USER_PASSWORD=yourPassword
+mvn clean install
+```
+
+3. Launch tests:
+```bash
+mvn test
+```
