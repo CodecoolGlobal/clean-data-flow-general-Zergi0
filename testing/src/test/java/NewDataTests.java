@@ -3,7 +3,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -47,8 +47,16 @@ public class NewDataTests {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"000001AA", "999999AA", "123456AA", "000000AA", "123456XX", "123456ZZ"})
-    public void idCardTestCorrectBoundaries(String idCardNumber) {
+    @CsvSource({"123456asd, false",
+            "12345asd, false",
+            "981asdmkd, false",
+            "000001AA, true",
+            "999999AA, true",
+            "123456AA, true",
+            "000000AA, true",
+            "123456XX, true",
+            "123456ZZ, true"  })
+    public void idCardTest(String idCardNumber, boolean expected) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register(userName, password);
         loggedOutNavbar.clickNavbarLogin();
@@ -57,40 +65,21 @@ public class NewDataTests {
         boolean pass = dataEntryPage.addNewEntry("test", "test", idCardNumber, "2-19870423-0726",
                 "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
                 1234, 1, 1, "20240911", true, 3);
-        Assertions.assertTrue(pass);
+        Assertions.assertEquals(expected,pass);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"123456asd", "12345asd", "981asdmkd"})
-    public void idCardTestIncorrectBoundaries(String idCardNumber) {
-        loggedOutNavbar.clickNavbarRegister();
-        registerPage.register(userName, password);
-        loggedOutNavbar.clickNavbarLogin();
-        loginPage.login(userName, password);
-        navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test", "test", idCardNumber, "2-19870423-0726",
-                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
-                1234, 1, 1, "20240911", true, 3);
-        Assertions.assertFalse(pass);
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1234, 9999, 1000, 1111})
-    public void ZipCodeCorrectBoundaries(int zip) {
-        loggedOutNavbar.clickNavbarRegister();
-        registerPage.register(userName, password);
-        loggedOutNavbar.clickNavbarLogin();
-        loginPage.login(userName, password);
-        navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
-                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
-                zip, 1, 1, "20240911", true, 3);
-        Assertions.assertTrue(pass);
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {19999, 12333, 9999999, 1, 22, 33})
-    public void ZipCodeIncorrectBoundaries(int zip) {
+    @CsvSource({"1234,true",
+            "9999, true",
+            "1000, true",
+            "1111, true",
+            "19999, false",
+            "12333, false",
+            "9999999, false",
+            "1, false",
+            "22, false",
+            "333, false"})
+    public void ZipCodeTest(int zip, boolean expected) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register(userName, password);
         loggedOutNavbar.clickNavbarLogin();
@@ -99,12 +88,18 @@ public class NewDataTests {
         boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
                 "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
                 zip, 1, 1, "20240911", true, 3);
-        Assertions.assertFalse(pass);
+        Assertions.assertEquals(expected,pass);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"12345678", "11111111", "11111111111", "99999999", "99999999999"})
-    public void PhoneNumberCorrectBoundaries(String phoneNumber) {
+    @CsvSource({"12345678,true",
+            "11111111, true",
+            "11111111111, true",
+            "99999999, true",
+            "99999999999, true",
+            "1111111,false",
+            "99999999999999999999, false"})
+    public void PhoneNumberTest(String phoneNumber, boolean expected) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register(userName, password);
         loggedOutNavbar.clickNavbarLogin();
@@ -113,26 +108,15 @@ public class NewDataTests {
         boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
                 "test@test.test", phoneNumber, "test 1", "Budapest", "Budapest",
                 1234, 1, 1, "20240911", true, 3);
-        Assertions.assertTrue(pass);
+        Assertions.assertEquals(expected,pass);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"1111111", "99999999999999999999"})
-    public void PhoneNumberIncorrectBoundaries(String phoneNumber) {
-        loggedOutNavbar.clickNavbarRegister();
-        registerPage.register(userName, password);
-        loggedOutNavbar.clickNavbarLogin();
-        loginPage.login(userName, password);
-        navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
-                "test@test.test", phoneNumber, "test 1", "Budapest", "Budapest",
-                1234, 1, 1, "20240911", true, 3);
-        Assertions.assertFalse(pass);
-    }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2-19870423-0726"})
-    public void PersonalCorrectBoundaries(String idNumber) {
+    @CsvSource({"2-19870423-0726, true",
+            "2-19870423-0701, false",
+            "2-19870423-0700, false"})
+    public void PersonalIdNumberTest(String idNumber, boolean expected) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register(userName, password);
         loggedOutNavbar.clickNavbarLogin();
@@ -141,26 +125,16 @@ public class NewDataTests {
         boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", idNumber,
                 "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
                 1234, 1, 1, "20240911", true, 3);
-        Assertions.assertTrue(pass);
+        Assertions.assertEquals(expected,pass);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2-19870423-0701", "2-19870423-0700"})
-    public void PersonalIncorrectBoundaries(String idNumber) {
-        loggedOutNavbar.clickNavbarRegister();
-        registerPage.register(userName, password);
-        loggedOutNavbar.clickNavbarLogin();
-        loginPage.login(userName, password);
-        navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", idNumber,
-                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
-                1234, 1, 1, "20240911", true, 3);
-        Assertions.assertFalse(pass);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"20220101", "20271231", "20251222"})
-    public void DateCorrectBoundaries(String date) {
+    @CsvSource({"20220101, true",
+            "20271231, true",
+            "20251222, true",
+            "20211231, false",
+            "20290101, false"})
+    public void DateTest(String date, boolean expected) {
         loggedOutNavbar.clickNavbarRegister();
         registerPage.register(userName, password);
         loggedOutNavbar.clickNavbarLogin();
@@ -169,23 +143,8 @@ public class NewDataTests {
         boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
                 "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
                 1234, 1, 1, date, true, 3);
-        Assertions.assertTrue(pass);
+        Assertions.assertEquals(expected,pass);
     }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"20211231", "20290101"})
-    public void DateIncorrectBoundaries(String date) {
-        loggedOutNavbar.clickNavbarRegister();
-        registerPage.register(userName, password);
-        loggedOutNavbar.clickNavbarLogin();
-        loginPage.login(userName, password);
-        navbar.clickDataEntryPage();
-        boolean pass = dataEntryPage.addNewEntry("test", "test", "123456AA", "2-19870423-0726",
-                "test@test.test", "12345678", "test 1", "Budapest", "Budapest",
-                1234, 1, 1, date, true, 3);
-        Assertions.assertFalse(pass);
-    }
-
 
     @AfterEach
     public void tearDown() {
