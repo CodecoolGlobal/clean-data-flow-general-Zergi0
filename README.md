@@ -5,10 +5,10 @@ This is a practice project made with the intention of learning how to handle mor
 Since the information required for each test is massive, the project uses Parameterized tests as a way to help readability. 
 
 ## Built With
-### Java
-### Selenium
-
-
+- Java
+- JUnit
+- Selenium
+- Maven
 
 # Getting Started
 
