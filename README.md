@@ -22,7 +22,7 @@ Ensure you have the following installed:
 - pip (Python package installer)
 
 ### Installation
--Install and run SUT:
+- Install and run SUT:
 
 1. **Clone the SUT repository:**
    ```bash
@@ -54,7 +54,7 @@ Ensure you have the following installed:
     python app.py
     ```
 
--Install and run tests:
+- Install and run tests:
 1. **Clone this repository:**
 ```bash
 git clone https://github.com/CodecoolGlobal/clean-data-flow-general-Zergi0.git
