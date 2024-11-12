@@ -1,4 +1,5 @@
 import POM.*;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +25,7 @@ public class NewDataTests {
 
     @BeforeEach
     public void setUp() {
+        Dotenv dotenv = Dotenv.load();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-search-engine-choice-screen");
         options.addArguments("--start-maximized");
@@ -36,8 +38,9 @@ public class NewDataTests {
         loginPage = new LoginPage(driver, wait);
         navbar = new Navbar(driver, wait);
         dataEntryPage = new DataEntryPage(driver, wait);
+        String url = dotenv.get("URL");
 
-        driver.get("http://localhost:5555/");
+        driver.get(url);
 
         String userName = "Testererer001";
         String password = "Ilovetesting123";
