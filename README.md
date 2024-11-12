@@ -55,12 +55,12 @@ Ensure you have the following installed:
     ```
 
 -Install and run tests:
-1. ** Clone this repository: **
+1. **Clone this repository:**
 ```bash
 git clone https://github.com/CodecoolGlobal/clean-data-flow-general-Zergi0.git
 ```
 
-2. **Navigate to the folder and install dependencies: **
+2. **Navigate to the folder and install dependencies:**
 ```bash
 mvn clean install
 ```
