@@ -24,7 +24,7 @@ Ensure you have the following installed:
 ### Installation
 -Install and run SUT:
 
-1. **Clone the SUT repository: **
+1. **Clone the SUT repository:**
    ```bash
    git clone https://github.com/CodecoolGlobal/system-under-testing-registration-form-general-Zergi0.git
    ```
