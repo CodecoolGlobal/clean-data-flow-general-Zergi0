@@ -60,13 +60,7 @@ Ensure you have the following installed:
 git clone https://github.com/CodecoolGlobal/clean-data-flow-general-Zergi0.git
 ```
 
-2. **Navigate to the folder and install dependencies and enviroment variables: **
-```bash
-set TEST_USER_NAME=yourUsername
-set TEST_USER_PASSWORD=yourPassword
-```
-Make sure your Passwords includes at least 1 lower case and 1 upper case letter as well as 1 number and it's at least 8 letters long
-
+2. **Navigate to the folder and install dependencies: **
 ```bash
 mvn clean install
 ```
